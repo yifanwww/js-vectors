@@ -1,0 +1,74 @@
+{
+    "name": "vectors.js",
+    "version": "0.0.0",
+    "description": "A lightweight library for vector data structures: Vector2, Vector3 and Vector4.",
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "homepage": "https://github.com/yifanwww/vectors.js#readme",
+    "license": "MIT",
+    "author": "yifanwww <yifanw1101@gmail.com> (https://github.com/yifanwww)",
+    "bugs": {
+        "url": "https://github.com/yifanwww/vectors.js/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/yifanwww/vectors.js.git"
+    },
+    "scripts": {
+        "build": "concurrently -n cjs,esm,types \"pnpm run build:cjs\" \"pnpm run build:esm\" \"pnpm run build:types\"",
+        "build:cjs": "tsc --project tsconfigs/tsconfig.cjs.json",
+        "build:esm": "tsc --project tsconfigs/tsconfig.esm.json",
+        "build:types": "tsc --project tsconfigs/tsconfig.types.json",
+        "clean": "rimraf coverage lib lib-commonjs tsconfigs/*.tsbuildinfo",
+        "format": "prettier --write \"**/*.{cjs,js,mjs,json,ts,yaml,yml}\"",
+        "lint": "eslint .",
+        "pre-commit": "lint-staged",
+        "prepare": "husky install",
+        "test": "node scripts/unit-test.js --color",
+        "test-full": "node scripts/unit-test.js --color",
+        "typecheck": "tsc --project tsconfig.json --noEmit"
+    },
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.20.12",
+        "@babel/preset-env": "^7.20.2",
+        "@babel/preset-typescript": "^7.18.6",
+        "@types/jest": "^29.4.0",
+        "@types/node": "^16.18.11",
+        "@types/semver": "^7.3.13",
+        "@typescript-eslint/eslint-plugin": "^5.50.0",
+        "@typescript-eslint/experimental-utils": "^5.50.0",
+        "@typescript-eslint/parser": "^5.50.0",
+        "@typescript-eslint/scope-manager": "^5.50.0",
+        "@typescript-eslint/types": "^5.50.0",
+        "@typescript-eslint/typescript-estree": "^5.50.0",
+        "@typescript-eslint/visitor-keys": "^5.50.0",
+        "babel-jest": "^29.4.1",
+        "concurrently": "^7.6.0",
+        "eslint": "^8.33.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-airbnb-typescript": "^17.0.0",
+        "eslint-config-prettier": "^8.6.0",
+        "eslint-plugin-import": "^2.27.5",
+        "eslint-plugin-jest": "^27.2.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "husky": "^8.0.3",
+        "jest": "^29.4.1",
+        "lint-staged": "^13.1.0",
+        "prettier": "2.8.3",
+        "rimraf": "^3.0.2",
+        "semver": "^7.3.8",
+        "typescript": "4.9.5"
+    },
+    "keywords": [
+        "vector",
+        "vectors",
+        "physics",
+        "2D",
+        "3D"
+    ]
+}
