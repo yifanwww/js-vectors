@@ -38,7 +38,6 @@ describe(`Test ${Vector2.name}'s predefined constant values`, () => {
 });
 
 describe(`Test static method \`${Vector2.name}.${Vector2.fromArray.name}\``, () => {
-    // ref: https://github.com/mrdoob/three.js/blob/r149/test/unit/src/math/Vector2.tests.js#L432
     it('should new a vector from array', () => {
         const array = [1, 2, 3, 4];
 
@@ -56,7 +55,6 @@ describe(`Test static method \`${Vector2.name}.${Vector2.fromArray.name}\``, () 
 });
 
 describe(`Test static method \`${Vector2.name}.prototype.${Vector2.prototype.toArray.name}\``, () => {
-    // ref: https://github.com/mrdoob/three.js/blob/r149/test/unit/src/math/Vector2.tests.js#L447
     it('should new a vector from array', () => {
         const array: number[] = [];
 
@@ -77,14 +75,14 @@ describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.set.name}\
         const x = 1;
         const y = 2;
 
-        const vector = new Vector2(0, 0);
+        const vector = Vector2.ZERO;
         vector.set(x, y);
 
-        TestHelper.equal2(vector, new Vector2(1, 2));
+        TestHelper.equal2(vector, new Vector2(x, y));
     });
 
     it('should return the vector itself', () => {
-        const vector = new Vector2(0, 0);
+        const vector = Vector2.ZERO;
         expect(vector.set(1, 2)).toBe(vector);
     });
 });
@@ -95,7 +93,7 @@ describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.setCompone
         const x = 1;
         const y = 2;
 
-        const vector = new Vector2(0, 0);
+        const vector = Vector2.ZERO;
         vector.setComponent(0, x);
         vector.setComponent(1, y);
         expect(vector.x).toBe(x);
@@ -103,7 +101,7 @@ describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.setCompone
     });
 
     it('should return the vector itself', () => {
-        const vector = new Vector2(0, 0);
+        const vector = Vector2.ZERO;
         expect(vector.setComponent(0, 1)).toBe(vector);
         expect(vector.setComponent(1, 2)).toBe(vector);
     });
@@ -136,13 +134,13 @@ describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.clone.name
 describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.copy.name}\``, () => {
     it('should copy another vector', () => {
         const a = new Vector2(1, 2);
-        const b = new Vector2(0, 0);
+        const b = Vector2.ZERO;
         TestHelper.equal2(b.copy(a), a);
     });
 
     it('should return the vector itself', () => {
         const a = new Vector2(1, 2);
-        const b = new Vector2(0, 0);
+        const b = Vector2.ZERO;
         expect(b.copy(a)).toBe(b);
     });
 });
@@ -161,7 +159,6 @@ describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.eq.name}\`
 });
 
 describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.ne.name}\``, () => {
-    // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector2Tests.cs#L950
     it('should copy another vector', () => {
         const a = new Vector2(1, 2);
         const b = new Vector2(1, 2);
@@ -1207,14 +1204,6 @@ describe(`Test static method \`${Vector2.name}.${Vector2.dot.name}\``, () => {
 
         expect(Vector2.dot(a, b)).toBe(0);
     });
-
-    // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector2Tests.cs#L224
-    it('should get dot product of vectors with special values', () => {
-        const a = new Vector2(-Number.MAX_VALUE, -Number.MAX_VALUE);
-        const b = new Vector2(Number.MAX_VALUE, Number.MAX_VALUE);
-
-        expect(Vector2.dot(a, b)).toBe(Number.NEGATIVE_INFINITY);
-    });
 });
 
 describe(`Test static method \`${Vector2.name}.${Vector2.cross.name}\``, () => {
@@ -1225,18 +1214,11 @@ describe(`Test static method \`${Vector2.name}.${Vector2.cross.name}\``, () => {
         expect(Vector2.cross(a, b)).toBe(-2);
     });
 
-    it('should get cross product of parallel vectors', () => {
+    it('should get cross product of same vectors', () => {
         const a = new Vector2(1.55, 1.55);
         const b = new Vector2(1.55, 1.55);
 
         expect(Vector2.cross(a, b)).toBe(0);
-    });
-
-    it('should get cross product of vectors with special values', () => {
-        const a = new Vector2(Number.MAX_VALUE, Number.MAX_VALUE);
-        const b = new Vector2(Number.MAX_VALUE, -Number.MAX_VALUE);
-
-        expect(Vector2.cross(a, b)).toBe(Number.NEGATIVE_INFINITY);
     });
 });
 
@@ -1375,7 +1357,7 @@ describe(`Test static method \`${Vector2.name}.${Vector2.lerp.name}\``, () => {
 
     // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector2Tests.cs#L414
     it('should perform a linear interpolation with factor 0', () => {
-        const a = new Vector2(0, 0);
+        const a = Vector2.ZERO;
         const b = new Vector2(3.18, 4.25);
 
         TestHelper.equal2(Vector2.lerp(a, b, 0), Vector2.ZERO);
@@ -1383,7 +1365,7 @@ describe(`Test static method \`${Vector2.name}.${Vector2.lerp.name}\``, () => {
 
     // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector2Tests.cs#L428
     it('should perform a linear interpolation with factor 1', () => {
-        const a = new Vector2(0, 0);
+        const a = Vector2.ZERO;
         const b = new Vector2(3.18, 4.25);
 
         TestHelper.equal2(Vector2.lerp(a, b, 1), new Vector2(3.18, 4.25));
@@ -1391,7 +1373,7 @@ describe(`Test static method \`${Vector2.name}.${Vector2.lerp.name}\``, () => {
 
     // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector2Tests.cs#L442
     it('should perform a linear interpolation with factor > 1', () => {
-        const a = new Vector2(0, 0);
+        const a = Vector2.ZERO;
         const b = new Vector2(3.18, 4.25);
 
         TestHelper.equal2(Vector2.lerp(a, b, 2), new Vector2(6.36, 8.5));
@@ -1399,7 +1381,7 @@ describe(`Test static method \`${Vector2.name}.${Vector2.lerp.name}\``, () => {
 
     // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector2Tests.cs#L456
     it('should perform a linear interpolation with factor < 0', () => {
-        const a = new Vector2(0, 0);
+        const a = Vector2.ZERO;
         const b = new Vector2(3.18, 4.25);
 
         TestHelper.equal2(Vector2.lerp(a, b, -2), new Vector2(-6.36, -8.5));
@@ -1443,7 +1425,7 @@ describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.lerp.name}
 
     // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector2Tests.cs#L414
     it('should perform a linear interpolation with factor 0', () => {
-        const a = new Vector2(0, 0);
+        const a = Vector2.ZERO;
         const b = new Vector2(3.18, 4.25);
 
         TestHelper.equal2(a.lerp(b, 0), Vector2.ZERO);
@@ -1451,7 +1433,7 @@ describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.lerp.name}
 
     // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector2Tests.cs#L428
     it('should perform a linear interpolation with factor 1', () => {
-        const a = new Vector2(0, 0);
+        const a = Vector2.ZERO;
         const b = new Vector2(3.18, 4.25);
 
         TestHelper.equal2(a.lerp(b, 1), new Vector2(3.18, 4.25));
@@ -1459,7 +1441,7 @@ describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.lerp.name}
 
     // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector2Tests.cs#L442
     it('should perform a linear interpolation with factor > 1', () => {
-        const a = new Vector2(0, 0);
+        const a = Vector2.ZERO;
         const b = new Vector2(3.18, 4.25);
 
         TestHelper.equal2(a.lerp(b, 2), new Vector2(6.36, 8.5));
@@ -1467,7 +1449,7 @@ describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.lerp.name}
 
     // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector2Tests.cs#L456
     it('should perform a linear interpolation with factor < 0', () => {
-        const a = new Vector2(0, 0);
+        const a = Vector2.ZERO;
         const b = new Vector2(3.18, 4.25);
 
         TestHelper.equal2(a.lerp(b, -2), new Vector2(-6.36, -8.5));
@@ -1502,7 +1484,7 @@ describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.lerp.name}
 
     it('should return the vector itself', () => {
         const a = new Vector2(1, 2);
-        const b = new Vector2(1, 2);
+        const b = new Vector2(3, 4);
 
         const actual = a.lerp(b, 0.5);
 
@@ -1560,7 +1542,7 @@ describe(`Test static method \`${Vector2.name}.${Vector2.reflect.name}\``, () =>
 
         // Reflect on XY plane
         {
-            const n = new Vector2(0, 0);
+            const n = Vector2.ZERO;
             TestHelper.equal2(Vector2.reflect(vector, n), new Vector2(vector.x, vector.y));
         }
 

@@ -1,48 +1,59 @@
 /**
- * Represents a vector with two double-precision floating-point values.
+ * Represents a vector with three double-precision floating-point values.
  */
-export class Vector2 {
+export class Vector3 {
     /** The x component of this vector. */
     declare x: number;
 
     /** The y component of this vector. */
     declare y: number;
 
+    /** The z component of this vector. */
+    declare z: number;
+
     /* ------------------------------------------------------------------------------------------------- Constructors */
 
-    constructor(x: number = 0, y: number = 0) {
+    constructor(x: number = 0, y: number = 0, z: number = 0) {
         this.x = x;
         this.y = y;
+        this.z = z;
     }
 
     /* ----------------------------------------------------------------------------------------- Predefined Constants */
 
     /**
-     * Returns the vector `(0,0)`.
+     * Returns the vector `(0,0,0)`.
      */
     static get ZERO() {
-        return new Vector2(0, 0);
+        return new Vector3(0, 0, 0);
     }
 
     /**
-     * Returns the vector `(1,1)`.
+     * Returns the vector `(1,1,1)`.
      */
     static get ONE() {
-        return new Vector2(1, 1);
+        return new Vector3(1, 1, 1);
     }
 
     /**
-     * Returns the vector `(1,0)`.
+     * Returns the vector `(1,0,0)`.
      */
     static get UNIT_X() {
-        return new Vector2(1, 0);
+        return new Vector3(1, 0, 0);
     }
 
     /**
-     * Returns the vector `(0,1)`.
+     * Returns the vector `(0,1,0)`.
      */
     static get UNIT_Y() {
-        return new Vector2(0, 1);
+        return new Vector3(0, 1, 0);
+    }
+
+    /**
+     * Returns the vector `(0,0,1)`.
+     */
+    static get UNIT_Z() {
+        return new Vector3(0, 0, 1);
     }
 
     /* ------------------------------------------------------------------------------------------- Array Transmutable */
@@ -59,11 +70,11 @@ export class Vector2 {
             throw new Error(`Index is out of range: ${index}, array length: ${array.length}`);
         }
 
-        if (array.length - index < 2) {
+        if (array.length - index < 3) {
             throw new Error(`Values in source array is not enough, index: ${index}, array length: ${array.length}`);
         }
 
-        return new Vector2(array[index], array[index + 1]);
+        return new Vector3(array[index], array[index + 1], array[index + 2]);
     }
 
     /**
@@ -79,18 +90,21 @@ export class Vector2 {
 
         array[index] = this.x;
         array[index + 1] = this.y;
+        array[index + 2] = this.z;
     }
 
     /* ---------------------------------------------------------------------------------------------------- Set & Get */
 
     /**
-     * Sets the x and y components of this vector.
+     * Sets the x, y and z components of this vector.
      * @param x The x component value.
      * @param y The y component value.
+     * @param z The z component value.
      */
-    set(x: number, y: number) {
+    set(x: number, y: number, z: number) {
         this.x = x;
         this.y = y;
+        this.z = z;
         return this;
     }
 
@@ -105,6 +119,7 @@ export class Vector2 {
         switch (index) {
             case 0: this.x = value; break;
             case 1: this.y = value; break;
+            case 2: this.z = value; break;
 
             /* istanbul ignore next */
             default:
@@ -123,6 +138,7 @@ export class Vector2 {
         switch (index) {
             case 0: return this.x;
             case 1: return this.y;
+            case 2: return this.z;
 
             /* istanbul ignore next */
             default:
@@ -133,19 +149,20 @@ export class Vector2 {
     /* ------------------------------------------------------------------------------------------------- Clone & Copy */
 
     /**
-     * Returns a new vector with the same x and y values as this one.
+     * Returns a new vector with the same x, y and z values as this one.
      */
     clone() {
-        return new Vector2(this.x, this.y);
+        return new Vector3(this.x, this.y, this.z);
     }
 
     /**
-     * Copies the values of the passed vector's x and y components to this vector.
+     * Copies the values of the passed vector's x, y and z components to this vector.
      * @param other The vector to be copied.
      */
-    copy(other: Vector2) {
+    copy(other: Vector3) {
         this.x = other.x;
         this.y = other.y;
+        this.z = other.z;
         return this;
     }
 
@@ -155,16 +172,16 @@ export class Vector2 {
      * Returns `true` if this vector and another vector are equal; `false` otherwise.
      * @param other The other vector.
      */
-    eq(other: Vector2) {
-        return this.x === other.x && this.y === other.y;
+    eq(other: Vector3) {
+        return this.x === other.x && this.y === other.y && this.z === other.z;
     }
 
     /**
      * Returns `true` if this vector and another vector are not equal; `false` otherwise.
      * @param other The other vector.
      */
-    ne(other: Vector2) {
-        return this.x !== other.x || this.y !== other.y;
+    ne(other: Vector3) {
+        return this.x !== other.x || this.y !== other.y || this.z !== other.z;
     }
 
     /* -------------------------------------------------------------------------------------------- Basic Computation */
@@ -174,8 +191,8 @@ export class Vector2 {
      * @param left The first vector to add.
      * @param right The second vector to add.
      */
-    static add(left: Vector2, right: Vector2) {
-        return new Vector2(left.x + right.x, left.y + right.y);
+    static add(left: Vector3, right: Vector3) {
+        return new Vector3(left.x + right.x, left.y + right.y, left.z + right.z);
     }
 
     /**
@@ -185,9 +202,10 @@ export class Vector2 {
      *
      * @param other The vector to add.
      */
-    add(other: Vector2) {
+    add(other: Vector3) {
         this.x += other.x;
         this.y += other.y;
+        this.z += other.z;
         return this;
     }
 
@@ -196,8 +214,8 @@ export class Vector2 {
      * @param left The vector.
      * @param right The scalar value.
      */
-    static addScalar(left: Vector2, right: number) {
-        return new Vector2(left.x + right, left.y + right);
+    static addScalar(left: Vector3, right: number) {
+        return new Vector3(left.x + right, left.y + right, left.z + right);
     }
 
     /**
@@ -210,6 +228,7 @@ export class Vector2 {
     addScalar(scalar: number) {
         this.x += scalar;
         this.y += scalar;
+        this.z += scalar;
         return this;
     }
 
@@ -218,8 +237,8 @@ export class Vector2 {
      * @param left The first vector.
      * @param right The second vector.
      */
-    static sub(left: Vector2, right: Vector2) {
-        return new Vector2(left.x - right.x, left.y - right.y);
+    static sub(left: Vector3, right: Vector3) {
+        return new Vector3(left.x - right.x, left.y - right.y, left.z - right.z);
     }
 
     /**
@@ -229,9 +248,10 @@ export class Vector2 {
      *
      * @param other The vector to subtracts.
      */
-    sub(other: Vector2) {
+    sub(other: Vector3) {
         this.x -= other.x;
         this.y -= other.y;
+        this.z -= other.z;
         return this;
     }
 
@@ -240,8 +260,8 @@ export class Vector2 {
      * @param left The vector.
      * @param right The scalar value.
      */
-    static subScalar(left: Vector2, right: number) {
-        return new Vector2(left.x - right, left.y - right);
+    static subScalar(left: Vector3, right: number) {
+        return new Vector3(left.x - right, left.y - right, left.z - right);
     }
 
     /**
@@ -254,6 +274,7 @@ export class Vector2 {
     subScalar(scalar: number) {
         this.x -= scalar;
         this.y -= scalar;
+        this.z -= scalar;
         return this;
     }
 
@@ -262,8 +283,8 @@ export class Vector2 {
      * @param left The first vector.
      * @param right The second vector.
      */
-    static mul(left: Vector2, right: Vector2) {
-        return new Vector2(left.x * right.x, left.y * right.y);
+    static mul(left: Vector3, right: Vector3) {
+        return new Vector3(left.x * right.x, left.y * right.y, left.z * right.z);
     }
 
     /**
@@ -273,9 +294,10 @@ export class Vector2 {
      *
      * @param other The vector to multiply.
      */
-    mul(other: Vector2) {
+    mul(other: Vector3) {
         this.x *= other.x;
         this.y *= other.y;
+        this.z *= other.z;
         return this;
     }
 
@@ -284,8 +306,8 @@ export class Vector2 {
      * @param left The vector.
      * @param right The scalar value.
      */
-    static mulScalar(left: Vector2, right: number) {
-        return new Vector2(left.x * right, left.y * right);
+    static mulScalar(left: Vector3, right: number) {
+        return new Vector3(left.x * right, left.y * right, left.z * right);
     }
 
     /**
@@ -298,6 +320,7 @@ export class Vector2 {
     mulScalar(scalar: number) {
         this.x *= scalar;
         this.y *= scalar;
+        this.z *= scalar;
         return this;
     }
 
@@ -306,8 +329,8 @@ export class Vector2 {
      * @param left The first vector.
      * @param right The second vector.
      */
-    static div(left: Vector2, right: Vector2) {
-        return new Vector2(left.x / right.x, left.y / right.y);
+    static div(left: Vector3, right: Vector3) {
+        return new Vector3(left.x / right.x, left.y / right.y, left.z / right.z);
     }
 
     /**
@@ -317,9 +340,10 @@ export class Vector2 {
      *
      * @param other The vector.
      */
-    div(other: Vector2) {
+    div(other: Vector3) {
         this.x /= other.x;
         this.y /= other.y;
+        this.z /= other.z;
         return this;
     }
 
@@ -328,8 +352,8 @@ export class Vector2 {
      * @param left The vector.
      * @param right The scalar value.
      */
-    static divScalar(left: Vector2, right: number) {
-        return new Vector2(left.x / right, left.y / right);
+    static divScalar(left: Vector3, right: number) {
+        return new Vector3(left.x / right, left.y / right, left.z / right);
     }
 
     /**
@@ -342,6 +366,7 @@ export class Vector2 {
     divScalar(scalar: number) {
         this.x /= scalar;
         this.y /= scalar;
+        this.z /= scalar;
         return this;
     }
 
@@ -352,21 +377,22 @@ export class Vector2 {
      * @param a The first vector.
      * @param b The second vector.
      */
-    static max(a: Vector2, b: Vector2) {
-        return new Vector2(Math.max(a.x, b.x), Math.max(a.y, b.y));
+    static max(a: Vector3, b: Vector3) {
+        return new Vector3(Math.max(a.x, b.x), Math.max(a.y, b.y), Math.max(a.z, b.z));
     }
 
     /**
-     * If this vector's x or y value is less than `other`'s x or y value,
+     * If this vector's x, y or z value is less than `other`'s x, y or z value,
      * replace that value with the corresponding max value.
      *
      * *This method mutates this vector itself.*
      *
      * @param other The vector to compare.
      */
-    max(other: Vector2) {
+    max(other: Vector3) {
         this.x = Math.max(this.x, other.x);
         this.y = Math.max(this.y, other.y);
+        this.z = Math.max(this.z, other.z);
         return this;
     }
 
@@ -375,21 +401,22 @@ export class Vector2 {
      * @param a The first vector.
      * @param b The second vector.
      */
-    static min(a: Vector2, b: Vector2) {
-        return new Vector2(Math.min(a.x, b.x), Math.min(a.y, b.y));
+    static min(a: Vector3, b: Vector3) {
+        return new Vector3(Math.min(a.x, b.x), Math.min(a.y, b.y), Math.min(a.z, b.z));
     }
 
     /**
-     * If this vector's x or y value is greater than `other`'s x or y value,
+     * If this vector's x, y or z value is greater than `other`'s x, y or z value,
      * replace that value with the corresponding min value.
      *
      * *This method mutates this vector itself.*
      *
      * @param other The vector to compare.
      */
-    min(other: Vector2) {
+    min(other: Vector3) {
         this.x = Math.min(this.x, other.x);
         this.y = Math.min(this.y, other.y);
+        this.z = Math.min(this.z, other.z);
         return this;
     }
 
@@ -406,8 +433,12 @@ export class Vector2 {
      * @param min The minimum value.
      * @param max The maximum value.
      */
-    static clamp(value: Vector2, min: Vector2, max: Vector2) {
-        return new Vector2(Math.min(Math.max(value.x, min.x), max.x), Math.min(Math.max(value.y, min.y), max.y));
+    static clamp(value: Vector3, min: Vector3, max: Vector3) {
+        return new Vector3(
+            Math.min(Math.max(value.x, min.x), max.x),
+            Math.min(Math.max(value.y, min.y), max.y),
+            Math.min(Math.max(value.z, min.z), max.z),
+        );
     }
 
     /**
@@ -424,9 +455,10 @@ export class Vector2 {
      * @param min The minimum value.
      * @param max The maximum value.
      */
-    clamp(min: Vector2, max: Vector2) {
+    clamp(min: Vector3, max: Vector3) {
         this.x = Math.min(Math.max(this.x, min.x), max.x);
         this.y = Math.min(Math.max(this.y, min.y), max.y);
+        this.z = Math.min(Math.max(this.z, min.z), max.z);
         return this;
     }
 
@@ -443,8 +475,12 @@ export class Vector2 {
      * @param min The minimum value.
      * @param max The maximum value.
      */
-    static clampScalar(value: Vector2, min: number, max: number) {
-        return new Vector2(Math.min(Math.max(value.x, min), max), Math.min(Math.max(value.y, min), max));
+    static clampScalar(value: Vector3, min: number, max: number) {
+        return new Vector3(
+            Math.min(Math.max(value.x, min), max),
+            Math.min(Math.max(value.y, min), max),
+            Math.min(Math.max(value.z, min), max),
+        );
     }
 
     /**
@@ -464,6 +500,7 @@ export class Vector2 {
     clampScalar(min: number, max: number) {
         this.x = Math.min(Math.max(this.x, min), max);
         this.y = Math.min(Math.max(this.y, min), max);
+        this.z = Math.min(Math.max(this.z, min), max);
         return this;
     }
 
@@ -471,8 +508,8 @@ export class Vector2 {
      * Rounds down the components of a vector to the nearest integer value.
      * @param value The vector.
      */
-    static floor(value: Vector2) {
-        return new Vector2(Math.floor(value.x), Math.floor(value.y));
+    static floor(value: Vector3) {
+        return new Vector3(Math.floor(value.x), Math.floor(value.y), Math.floor(value.z));
     }
 
     /**
@@ -483,6 +520,7 @@ export class Vector2 {
     floor() {
         this.x = Math.floor(this.x);
         this.y = Math.floor(this.y);
+        this.z = Math.floor(this.z);
         return this;
     }
 
@@ -490,8 +528,8 @@ export class Vector2 {
      * Rounds up the components of a vector to the nearest integer value.
      * @param value The vector.
      */
-    static ceil(value: Vector2) {
-        return new Vector2(Math.ceil(value.x), Math.ceil(value.y));
+    static ceil(value: Vector3) {
+        return new Vector3(Math.ceil(value.x), Math.ceil(value.y), Math.ceil(value.z));
     }
 
     /**
@@ -502,6 +540,7 @@ export class Vector2 {
     ceil() {
         this.x = Math.ceil(this.x);
         this.y = Math.ceil(this.y);
+        this.z = Math.ceil(this.z);
         return this;
     }
 
@@ -509,8 +548,8 @@ export class Vector2 {
      * Rounds the components of a vector to the nearest integer value.
      * @param value The vector.
      */
-    static round(value: Vector2) {
-        return new Vector2(Math.round(value.x), Math.round(value.y));
+    static round(value: Vector3) {
+        return new Vector3(Math.round(value.x), Math.round(value.y), Math.round(value.z));
     }
 
     /**
@@ -521,6 +560,7 @@ export class Vector2 {
     round() {
         this.x = Math.round(this.x);
         this.y = Math.round(this.y);
+        this.z = Math.round(this.z);
         return this;
     }
 
@@ -528,10 +568,11 @@ export class Vector2 {
      * Rounds the components of a vector towards zero (up if negative, down if positive) to an integer value.
      * @param value The vector.
      */
-    static roundToZero(value: Vector2) {
-        return new Vector2(
+    static roundToZero(value: Vector3) {
+        return new Vector3(
             value.x < 0 ? Math.ceil(value.x) : Math.floor(value.x),
             value.y < 0 ? Math.ceil(value.y) : Math.floor(value.y),
+            value.z < 0 ? Math.ceil(value.z) : Math.floor(value.z),
         );
     }
 
@@ -543,6 +584,7 @@ export class Vector2 {
     roundToZero() {
         this.x = this.x < 0 ? Math.ceil(this.x) : Math.floor(this.x);
         this.y = this.y < 0 ? Math.ceil(this.y) : Math.floor(this.y);
+        this.z = this.z < 0 ? Math.ceil(this.z) : Math.floor(this.z);
         return this;
     }
 
@@ -550,8 +592,8 @@ export class Vector2 {
      * Negates the specified vector.
      * @param value The vector to negate.
      */
-    static neg(value: Vector2) {
-        return new Vector2(-value.x, -value.y);
+    static neg(value: Vector3) {
+        return new Vector3(-value.x, -value.y, -value.z);
     }
 
     /**
@@ -562,6 +604,7 @@ export class Vector2 {
     neg() {
         this.x = -this.x;
         this.y = -this.y;
+        this.z = -this.z;
         return this;
     }
 
@@ -570,28 +613,46 @@ export class Vector2 {
      * @param left The first vector.
      * @param right The second vector.
      */
-    static dot(left: Vector2, right: Vector2) {
-        return left.x * right.x + left.y * right.y;
+    static dot(left: Vector3, right: Vector3) {
+        return left.x * right.x + left.y * right.y + left.z * right.z;
     }
 
     /**
      * Returns the cross product of two vectors.
      *
-     * Note that `cross-product` in 2D is not well-defined.
-     * This function computes a geometric cross-product commonly used in 2D graphics.
-     *
      * @param left The first vector.
      * @param right The second vector.
      */
-    static cross(left: Vector2, right: Vector2) {
-        return left.x * right.y - left.y * right.x;
+    static cross(left: Vector3, right: Vector3) {
+        return new Vector3(
+            left.y * right.z - left.z * right.y,
+            left.z * right.x - left.x * right.z,
+            left.x * right.y - left.y * right.x,
+        );
+    }
+
+    /**
+     * Returns the cross product of two vectors.
+     *
+     * *This method mutates this vector itself.*
+     *
+     * @param other The other vector.
+     */
+    cross(other: Vector3) {
+        const x = this.y * other.z - this.z * other.y;
+        const y = this.z * other.x - this.x * other.z;
+        const z = this.x * other.y - this.y * other.x;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        return this;
     }
 
     /**
      * Returns the squared length of this vector.
      */
     lengthSq() {
-        return this.x * this.x + this.y * this.y;
+        return this.x * this.x + this.y * this.y + this.z * this.z;
     }
 
     /**
@@ -605,8 +666,8 @@ export class Vector2 {
      * Returns a vector with the same direction as the specified vector, but with a length of one.
      * @param value The vector to normalize.
      */
-    static normalize(value: Vector2) {
-        return Vector2.divScalar(value, value.length());
+    static normalize(value: Vector3) {
+        return Vector3.divScalar(value, value.length());
     }
 
     /**
@@ -622,8 +683,8 @@ export class Vector2 {
      * Returns a vector whose components are the absolute values of each of specified vector's components.
      * @param value The vector.
      */
-    static abs(value: Vector2) {
-        return new Vector2(Math.abs(value.x), Math.abs(value.y));
+    static abs(value: Vector3) {
+        return new Vector3(Math.abs(value.x), Math.abs(value.y), Math.abs(value.z));
     }
 
     /**
@@ -634,6 +695,7 @@ export class Vector2 {
     abs() {
         this.x = Math.abs(this.x);
         this.y = Math.abs(this.y);
+        this.z = Math.abs(this.z);
         return this;
     }
 
@@ -642,10 +704,11 @@ export class Vector2 {
      * @param a The first vector.
      * @param b The second vector.
      */
-    static distanceSq(a: Vector2, b: Vector2) {
+    static distanceSq(a: Vector3, b: Vector3) {
         const dx = a.x - b.x;
         const dy = a.y - b.y;
-        return dx * dx + dy * dy;
+        const dz = a.z - b.z;
+        return dx * dx + dy * dy + dz * dz;
     }
 
     /**
@@ -653,8 +716,8 @@ export class Vector2 {
      * @param a The first vector.
      * @param b The second vector.
      */
-    static distance(a: Vector2, b: Vector2) {
-        return Math.sqrt(Vector2.distanceSq(a, b));
+    static distance(a: Vector3, b: Vector3) {
+        return Math.sqrt(Vector3.distanceSq(a, b));
     }
 
     /**
@@ -663,10 +726,14 @@ export class Vector2 {
      * @param b The second vector.
      * @param alpha Interpolation factor, typically in the closed interval `[0,1]`.
      */
-    static lerp(a: Vector2, b: Vector2, alpha: number) {
+    static lerp(a: Vector3, b: Vector3, alpha: number) {
         // don't change to `a + (b - a) * alpha`
         // refer to https://learn.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/5.0/vector-lerp-behavior-change
-        return new Vector2(a.x * (1 - alpha) + b.x * alpha, a.y * (1 - alpha) + b.y * alpha);
+        return new Vector3(
+            a.x * (1 - alpha) + b.x * alpha,
+            a.y * (1 - alpha) + b.y * alpha,
+            a.z * (1 - alpha) + b.z * alpha,
+        );
     }
 
     /**
@@ -677,11 +744,12 @@ export class Vector2 {
      * @param other The vector.
      * @param alpha Interpolation factor, typically in the closed interval `[0,1]`.
      */
-    lerp(other: Vector2, alpha: number) {
+    lerp(other: Vector3, alpha: number) {
         // don't change to `a + (b - a) * alpha`
         // refer to https://learn.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/5.0/vector-lerp-behavior-change
         this.x = this.x * (1 - alpha) + other.x * alpha;
         this.y = this.y * (1 - alpha) + other.y * alpha;
+        this.z = this.z * (1 - alpha) + other.z * alpha;
         return this;
     }
 
@@ -689,8 +757,8 @@ export class Vector2 {
      * Return a vector whose components are the square root of each of a specified vector's components.
      * @param value A vector.
      */
-    static sqrt(value: Vector2) {
-        return new Vector2(Math.sqrt(value.x), Math.sqrt(value.y));
+    static sqrt(value: Vector3) {
+        return new Vector3(Math.sqrt(value.x), Math.sqrt(value.y), Math.sqrt(value.z));
     }
 
     /**
@@ -701,6 +769,7 @@ export class Vector2 {
     sqrt() {
         this.x = Math.sqrt(this.x);
         this.y = Math.sqrt(this.y);
+        this.z = Math.sqrt(this.z);
         return this;
     }
 
@@ -709,8 +778,8 @@ export class Vector2 {
      * @param vector The source vector.
      * @param normal The normal of the surface being reflected off.
      */
-    static reflect(vector: Vector2, normal: Vector2) {
-        const dot = Vector2.dot(vector, normal);
-        return new Vector2(vector.x - 2 * dot * normal.x, vector.y - 2 * dot * normal.y);
+    static reflect(vector: Vector3, normal: Vector3) {
+        const dot = Vector3.dot(vector, normal);
+        return new Vector3(vector.x - 2 * dot * normal.x, vector.y - 2 * dot * normal.y, vector.z - 2 * dot * normal.z);
     }
 }
