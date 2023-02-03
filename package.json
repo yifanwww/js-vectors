@@ -25,8 +25,8 @@
         "lint": "eslint .",
         "pre-commit": "lint-staged",
         "prepare": "husky install",
-        "test": "node scripts/unit-test.js --color",
-        "test-full": "node scripts/unit-test.js --color",
+        "test": "node scripts/unit-test.js",
+        "test-full": "node scripts/unit-test.js",
         "typecheck": "tsc --project tsconfig.json --noEmit"
     },
     "engines": {

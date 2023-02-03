@@ -9,14 +9,7 @@ const genCommand = (...params) => params.filter(Boolean).join(' ');
 function unitTest(watch) {
     const argv = process.argv.slice(2);
 
-    const command = genCommand(
-        'jest',
-        '--config',
-        paths.jestConfig,
-        watch ? '--watch' : '--coverage',
-        '--passWithNoTests',
-        ...argv,
-    );
+    const command = genCommand('jest', '--config', paths.jestConfig, watch ? '--watch' : '--coverage', ...argv);
 
     const env = {
         ...process.env,
