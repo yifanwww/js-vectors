@@ -1,7 +1,7 @@
 {
     "folders": [
         {
-            "name": "vectors.js",
+            "name": "js-vectors",
             "path": "."
         }
     ],
@@ -31,7 +31,7 @@
         "search.useParentIgnoreFiles": true,
 
         "typescript.enablePromptUseWorkspaceTsdk": true,
-        "typescript.tsdk": "vectors.js/node_modules/typescript/lib",
+        "typescript.tsdk": "js-vectors/node_modules/typescript/lib",
 
         "[css]": {
             "editor.defaultFormatter": "esbenp.prettier-vscode",

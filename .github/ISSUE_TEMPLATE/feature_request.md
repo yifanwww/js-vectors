@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Do you have Feature or improvement for vectors.js? Let me know.
+about: Do you have Feature or improvement for js-vectors? Let me know.
 ---
 
 #### Describe the feature that you would like added

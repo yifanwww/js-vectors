@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Found a bug in vectors.js? Please let me know.
+about: Found a bug in js-vectors? Please let me know.
 ---
 
 <!--
