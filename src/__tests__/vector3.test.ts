@@ -79,7 +79,7 @@ describe(`Test method \`${Vector3.name}.prototype.${Vector3.prototype.set.name}\
     it('should set components', () => {
         const x = 1;
         const y = 2;
-        const z = 2;
+        const z = 3;
 
         const vector = Vector3.ZERO;
         vector.set(x, y, z);
@@ -98,7 +98,7 @@ describe(`Test method \`${Vector3.name}.prototype.${Vector3.prototype.setCompone
     it('should set a specified component', () => {
         const x = 1;
         const y = 2;
-        const z = 2;
+        const z = 3;
 
         const vector = Vector3.ZERO;
         vector.setComponent(0, x);
@@ -122,7 +122,7 @@ describe(`Test method \`${Vector3.name}.prototype.${Vector3.prototype.getCompone
     it('should get a specified component value', () => {
         const x = 1;
         const y = 2;
-        const z = 2;
+        const z = 3;
 
         const vector = new Vector3(x, y, z);
         expect(vector.getComponent(0)).toBe(x);
@@ -158,27 +158,20 @@ describe(`Test method \`${Vector3.name}.prototype.${Vector3.prototype.copy.name}
 });
 
 describe(`Test method \`${Vector3.name}.prototype.${Vector3.prototype.eq.name}\``, () => {
-    // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector3Tests.cs#L1009
     it('should copy another vector', () => {
-        const a = new Vector3(1, 2, 3);
-        const b = new Vector3(1, 2, 3);
-
-        expect(a.eq(b)).toBeTruthy();
-
-        b.x = 10;
-        expect(a.eq(b)).toBeFalsy();
+        expect(new Vector3(1, 2, 3).eq(new Vector3(1, 2, 3))).toBeTruthy();
+        expect(new Vector3(1, 2, 3).eq(new Vector3(0, 2, 3))).toBeFalsy();
+        expect(new Vector3(1, 2, 3).eq(new Vector3(1, 0, 3))).toBeFalsy();
+        expect(new Vector3(1, 2, 3).eq(new Vector3(1, 2, 0))).toBeFalsy();
     });
 });
 
 describe(`Test method \`${Vector3.name}.prototype.${Vector3.prototype.ne.name}\``, () => {
     it('should copy another vector', () => {
-        const a = new Vector3(1, 2, 3);
-        const b = new Vector3(1, 2, 3);
-
-        expect(a.ne(b)).toBeFalsy();
-
-        b.x = 10;
-        expect(a.ne(b)).toBeTruthy();
+        expect(new Vector3(1, 2, 3).ne(new Vector3(1, 2, 3))).toBeFalsy();
+        expect(new Vector3(1, 2, 3).ne(new Vector3(0, 2, 3))).toBeTruthy();
+        expect(new Vector3(1, 2, 3).ne(new Vector3(1, 0, 3))).toBeTruthy();
+        expect(new Vector3(1, 2, 3).ne(new Vector3(1, 2, 0))).toBeTruthy();
     });
 });
 
@@ -1284,8 +1277,8 @@ describe(`Test method \`${Vector3.name}.prototype.${Vector3.prototype.cross.name
 });
 
 describe(`Test method \`${Vector3.name}.prototype.${Vector3.prototype.lengthSq.name}\``, () => {
+    // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector3Tests.cs#L296
     it('should get squared length', () => {
-        // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector3Tests.cs#L296
         expect(new Vector3(1, 2, 3).lengthSq()).toBe(14);
     });
 });

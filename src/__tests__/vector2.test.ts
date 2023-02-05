@@ -146,27 +146,18 @@ describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.copy.name}
 });
 
 describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.eq.name}\``, () => {
-    // ref: https://github.com/dotnet/runtime/blob/v7.0.2/src/libraries/System.Numerics.Vectors/tests/Vector2Tests.cs#L950
     it('should copy another vector', () => {
-        const a = new Vector2(1, 2);
-        const b = new Vector2(1, 2);
-
-        expect(a.eq(b)).toBeTruthy();
-
-        b.x = 10;
-        expect(a.eq(b)).toBeFalsy();
+        expect(new Vector2(1, 2).eq(new Vector2(1, 2))).toBeTruthy();
+        expect(new Vector2(1, 2).eq(new Vector2(0, 2))).toBeFalsy();
+        expect(new Vector2(1, 2).eq(new Vector2(1, 0))).toBeFalsy();
     });
 });
 
 describe(`Test method \`${Vector2.name}.prototype.${Vector2.prototype.ne.name}\``, () => {
     it('should copy another vector', () => {
-        const a = new Vector2(1, 2);
-        const b = new Vector2(1, 2);
-
-        expect(a.ne(b)).toBeFalsy();
-
-        b.x = 10;
-        expect(a.ne(b)).toBeTruthy();
+        expect(new Vector2(1, 2).ne(new Vector2(1, 2))).toBeFalsy();
+        expect(new Vector2(1, 2).ne(new Vector2(0, 2))).toBeTruthy();
+        expect(new Vector2(1, 2).ne(new Vector2(1, 0))).toBeTruthy();
     });
 });
 
