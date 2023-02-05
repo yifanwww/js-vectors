@@ -1,19 +1,19 @@
 {
     "name": "js-vectors",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "A lightweight library for vector data structures: Vector2, Vector3 and Vector4.",
     "main": "lib-commonjs/index.js",
     "module": "lib/index.js",
     "types": "lib/index.d.ts",
-    "homepage": "https://github.com/yifanwww/vectors.js#readme",
+    "homepage": "https://github.com/yifanwww/js-vectors#readme",
     "license": "MIT",
     "author": "yifanwww <yifanw1101@gmail.com> (https://github.com/yifanwww)",
     "bugs": {
-        "url": "https://github.com/yifanwww/vectors.js/issues"
+        "url": "https://github.com/yifanwww/js-vectors/issues"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/yifanwww/vectors.js.git"
+        "url": "git+https://github.com/yifanwww/js-vectors.git"
     },
     "scripts": {
         "build": "concurrently -n cjs,esm,types \"pnpm run build:cjs\" \"pnpm run build:esm\" \"pnpm run build:types\"",

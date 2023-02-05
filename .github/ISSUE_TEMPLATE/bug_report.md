@@ -8,8 +8,8 @@ Thanks for contacting us! We're here to help.
 
 Before you report an issue, check if it's been reported before:
 
-  * Search: https://github.com/yifanwww/vectors.js/search?type=Issues
-  * Search by area or component: https://github.com/yifanwww/vectors.js/issues/labels
+  * Search: https://github.com/yifanwww/js-vectors/search?type=Issues
+  * Search by area or component: https://github.com/yifanwww/js-vectors/issues/labels
 
 Note that if you do not provide enough information to reproduce the issue, we may not be able to take action on your report.
 -->
