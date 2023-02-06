@@ -1,6 +1,6 @@
 {
     "name": "js-vectors",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A lightweight library for vector data structures: Vector2, Vector3 and Vector4.",
     "main": "lib-commonjs/index.js",
     "module": "lib/index.js",
